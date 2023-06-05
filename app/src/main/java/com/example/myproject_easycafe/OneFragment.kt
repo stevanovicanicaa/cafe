@@ -21,8 +21,6 @@ class OneFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_one, container, false)
         val view = binding.root
 
-        binding.bottonNavView.background = null
-
         setUpNav()
 
         return view

@@ -2,15 +2,19 @@ package com.example.myproject_easycafe
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myproject_easycafe.Data.HEADER_BL
-import com.example.myproject_easycafe.Data.ITEM_BL
 import com.example.myproject_easycafe.databinding.HeaderBillListBinding
 import com.example.myproject_easycafe.databinding.ItemBillListBinding
 import java.text.DateFormat
 import java.util.*
 
-class MainAdapter_BillList : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class BillListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
+    companion object{
+        private const val HEADER = 0
+        private const val ITEM = 1
+    }
 
     class ItemViewHolder(val itemBinding: ItemBillListBinding) :
         RecyclerView.ViewHolder(itemBinding.root) {
@@ -41,14 +45,14 @@ class MainAdapter_BillList : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
-            ITEM_BL -> ItemViewHolder(
+            ITEM -> ItemViewHolder(
                 ItemBillListBinding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,
                     false
                 )
             )
-            HEADER_BL -> HeaderViewHolder(
+            HEADER -> HeaderViewHolder(
                 HeaderBillListBinding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,
@@ -71,16 +75,18 @@ class MainAdapter_BillList : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun getItemViewType(position: Int): Int {
         return when (itemList[position]) {
-            is DataItem.ItemBillList -> ITEM_BL
-            is DataItem.HeaderBillList -> HEADER_BL
+            is DataItem.ItemBillList -> ITEM
+            is DataItem.HeaderBillList -> HEADER
             else -> throw IllegalArgumentException("Invalid Item")
         }
     }
 
     fun updateList(updatedList: List<DataItem>){
+        val diffCallback = DiffCallback(itemList,updatedList)
+        val diffResult = DiffUtil.calculateDiff(diffCallback)
         itemList.clear()
         itemList.addAll(updatedList)
-        notifyDataSetChanged()
+        diffResult.dispatchUpdatesTo(this)
     }
 }
 

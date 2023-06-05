@@ -13,6 +13,14 @@
             type="com.example.myproject_easycafe.DataItem.ItemBillList" />
     </data>
 
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="8dp"
+        android:backgroundTint="@color/l_brown"
+        app:cardUseCompatPadding="true">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -21,9 +29,10 @@
 
         <TextView
             android:id="@+id/title"
-            android:layout_width="300dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Capucino"
+            android:textStyle="bold"
             android:layout_marginStart="20dp"
             />
         <!--        android:text="@{item.title}"-->
@@ -65,7 +74,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="140dp"
+                android:layout_marginStart="100dp"
+                android:textStyle="bold"
                 android:text="$"/>
 
             <TextView
@@ -73,9 +83,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
-                android:text="4201.98" />
+                android:textStyle="bold"
+                android:text="49000.00" />
 
         </LinearLayout>
 
     </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
 </layout>

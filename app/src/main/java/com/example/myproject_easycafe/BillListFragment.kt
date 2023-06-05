@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myproject_easycafe.databinding.FragmentBillListBinding
 
@@ -14,7 +15,7 @@ import com.example.myproject_easycafe.databinding.FragmentBillListBinding
 class BillListFragment : Fragment() {
 
     private lateinit var binding: FragmentBillListBinding
-    private val adapterList by lazy { MainAdapter_BillList() }
+    private val adapterList by lazy { BillListAdapter() }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,6 +32,7 @@ class BillListFragment : Fragment() {
         adapterList.updateList(itemList)
         binding.recyclerView.apply {
             layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL,false)
+            itemAnimator = DefaultItemAnimator()
             adapter = adapterList
         }
         return view

@@ -1,14 +1,22 @@
 package com.example.myproject_easycafe
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myproject_easycafe.Data.HEADER
-import com.example.myproject_easycafe.Data.ITEM
 import com.example.myproject_easycafe.databinding.HeaderPricelistBinding
 import com.example.myproject_easycafe.databinding.ItemPricelistBinding
+import java.util.*
 
-class MainAdapter_Pricelist : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class PricelistAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
+    companion object{
+        private const val HEADER = 0
+        private const val ITEM = 1
+    }
+
 
     class ItemViewHolder(val itemBinding: ItemPricelistBinding):
         RecyclerView.ViewHolder(itemBinding.root){
@@ -60,8 +68,19 @@ class MainAdapter_Pricelist : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     fun updateList(updatedList: List<DataItem>){
+        val diffCallback = DiffCallback(itemList,updatedList)
+        val diffResult = DiffUtil.calculateDiff(diffCallback)
         itemList.clear()
         itemList.addAll(updatedList)
-        notifyDataSetChanged()
+        diffResult.dispatchUpdatesTo(this)
     }
+
+    fun setData(updatedList: MutableList<DataItem>){
+        val diffCallback = DiffCallback(itemList,updatedList)
+        val diffResult = DiffUtil.calculateDiff(diffCallback)
+        itemList.clear()
+        itemList.addAll(updatedList)
+        diffResult.dispatchUpdatesTo(this)
+    }
+
 }

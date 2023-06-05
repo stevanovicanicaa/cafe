@@ -1,10 +1,6 @@
 package com.example.myproject_easycafe
 
 object Data {
-    const val HEADER = 0
-    const val ITEM = 1
-    const val HEADER_BL = 2
-    const val ITEM_BL = 3
 
     fun getItems(): List<DataItem> {
 

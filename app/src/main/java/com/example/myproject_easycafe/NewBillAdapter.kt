@@ -2,14 +2,17 @@ package com.example.myproject_easycafe
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myproject_easycafe.Data.HEADER
-import com.example.myproject_easycafe.Data.ITEM
 import com.example.myproject_easycafe.databinding.HeaderNewBillBinding
 import com.example.myproject_easycafe.databinding.ItemNewBillBinding
 
+class NewBillAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-class MainAdapter_NewBill : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+    companion object{
+        private const val HEADER = 0
+        private const val ITEM = 1
+    }
 
     class ItemViewHolder(val itemBinding: ItemNewBillBinding):
         RecyclerView.ViewHolder(itemBinding.root){
@@ -58,9 +61,11 @@ class MainAdapter_NewBill : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         }
     }
     fun updateList(updatedList: List<DataItem>){
+        val diffCallback = DiffCallback(itemList,updatedList)
+        val diffResult = DiffUtil.calculateDiff(diffCallback)
         itemList.clear()
         itemList.addAll(updatedList)
-        notifyDataSetChanged()
+        diffResult.dispatchUpdatesTo(this)
     }
 
 

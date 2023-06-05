@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="FAB_Style">
+        <item name="cornerSize">30%</item>
+        <item name="cornerFamily">cut</item>
+    </style>
+</resources>

@@ -9,6 +9,14 @@
             type="com.example.myproject_easycafe.DataItem.ItemPricelist" />
     </data>
 
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="8dp"
+        android:backgroundTint="@color/l_brown"
+        app:cardUseCompatPadding="true">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -36,4 +44,5 @@
             android:text="@{Double.toString(item.price)}" />
 
     </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
 </layout>

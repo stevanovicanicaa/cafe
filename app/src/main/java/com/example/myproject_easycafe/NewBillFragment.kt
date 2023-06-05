@@ -13,7 +13,7 @@ import com.example.myproject_easycafe.databinding.FragmentNewBillBinding
 class NewBillFragment : Fragment() {
 
     private lateinit var binding: FragmentNewBillBinding
-    private val adapterList by lazy { MainAdapter_NewBill() }
+    private val adapterList by lazy { NewBillAdapter() }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -22,13 +22,12 @@ class NewBillFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_new_bill, container, false)
         val view = binding.root
 
-        binding.button.setOnClickListener {
+        binding.next.setOnClickListener {
             findNavController().navigate(R.id.action_newBillFragment_to_billDetailsFragment)
         }
 
         val itemList = Data.getItems1()
         adapterList.updateList(itemList)
-        binding.recyclerView.setHasFixedSize(true)
         binding.recyclerView.apply {
             layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
             adapter = adapterList

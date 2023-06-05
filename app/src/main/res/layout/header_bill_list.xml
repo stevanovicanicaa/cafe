@@ -14,37 +14,40 @@
         android:layout_height="wrap_content"
         app:cardCornerRadius="8dp"
         app:cardElevation="8dp"
+        android:backgroundTint="@color/brown"
         app:cardUseCompatPadding="true">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
-            android:background="@android:color/transparent"
             android:padding="5dp">
 
             <TextView
                 android:id="@+id/date"
-                android:layout_width="300dp"
+                android:layout_width="280dp"
                 android:layout_height="wrap_content"
                 android:text="Date"
+                android:textStyle="bold"
                 android:layout_marginStart="20dp"
-                android:textSize="12sp" />
+                android:textSize="15sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:text="$"
-                android:textSize="12sp"/>
+                android:textStyle="bold"
+                android:textSize="15sp"/>
 
             <TextView
                 android:id="@+id/price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
+                android:textStyle="bold"
                 android:text="@{Double.toString(header.price)}"
-                android:textSize="12sp" />
+                android:textSize="15sp" />
 
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
