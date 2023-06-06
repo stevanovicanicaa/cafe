@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/BillList"
-        android:title="Bill list" />
+        android:title="Bill list"/>
 
     <item
         android:id="@+id/Pricelist"

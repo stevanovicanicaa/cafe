@@ -33,6 +33,7 @@
             android:layout_height="wrap_content"
             android:text="Capucino"
             android:textStyle="bold"
+            android:textColor="@color/black"
             android:layout_marginStart="20dp"
             />
         <!--        android:text="@{item.title}"-->
@@ -47,6 +48,7 @@
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
+                android:textColor="@color/black"
                 android:text="70.00"/>
             <!--            android:text="@{Double.toString(itemBillList.quantity)}"/>-->
 
@@ -54,12 +56,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
+                android:textColor="@color/black"
                 android:text="X"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
+                android:textColor="@color/black"
                 android:text="$"/>
 
             <TextView
@@ -67,6 +71,7 @@
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
+                android:textColor="@color/black"
                 android:text="700.00"/>
             <!--            android:text="@{Double.toString(item.price)}"-->
 
@@ -76,6 +81,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="100dp"
                 android:textStyle="bold"
+                android:textColor="@color/black"
                 android:text="$"/>
 
             <TextView
@@ -84,6 +90,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
                 android:textStyle="bold"
+                android:textColor="@color/black"
                 android:text="49000.00" />
 
         </LinearLayout>

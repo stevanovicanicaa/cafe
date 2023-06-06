@@ -28,12 +28,14 @@
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:text="@{item.title}"
+            android:textColor="@color/black"
             android:layout_marginStart="20dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
+            android:textColor="@color/black"
             android:text="$"/>
 
         <TextView
@@ -41,6 +43,7 @@
             android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
+            android:textColor="@color/black"
             android:text="@{Double.toString(item.price)}" />
 
         <ImageView

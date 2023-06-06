@@ -27,7 +27,7 @@
                 android:id="@+id/date"
                 android:layout_width="280dp"
                 android:layout_height="wrap_content"
-                android:text="Date"
+                android:textColor="@color/black"
                 android:textStyle="bold"
                 android:layout_marginStart="20dp"
                 android:textSize="15sp" />
@@ -37,6 +37,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:text="$"
+                android:textColor="@color/black"
                 android:textStyle="bold"
                 android:textSize="15sp"/>
 
@@ -46,6 +47,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
                 android:textStyle="bold"
+                android:textColor="@color/black"
                 android:text="@{Double.toString(header.price)}"
                 android:textSize="15sp" />
 

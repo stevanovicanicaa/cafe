@@ -6,14 +6,11 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myproject_easycafe.databinding.FragmentPricelistBinding
-import java.util.*
-import kotlin.collections.ArrayList
 
 class PricelistFragment : Fragment() {
 
@@ -35,6 +32,8 @@ class PricelistFragment : Fragment() {
 
         itemList = Data.getItems1()
         adapterList.updateList(itemList)
+
+        binding.message.visibility = View.GONE
 
         binding.recyclerView.apply {
             layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
@@ -58,20 +57,23 @@ class PricelistFragment : Fragment() {
 
     private fun filterList(filterText: String) {
         val filteredList = mutableListOf<DataItem>()
-        val message = mutableListOf<DataItem>()
-        message.add(DataItem.HeaderPricelist("There is no items for selected criteria"))
         if (filterText.length >= 3) {
             for (item in itemList) {
                 if (item.toString().lowercase().contains(filterText.lowercase())) {
                     filteredList.add(item)
                 }
             }
-            adapterList!!.setData(filteredList)
+            adapterList.setData(filteredList)
+            binding.recyclerView.visibility = View.VISIBLE
+            binding.message.visibility = View.GONE
             if (filteredList.isEmpty()) {
-                adapterList!!.setData(message)
+                binding.recyclerView.visibility = View.GONE
+                binding.message.visibility = View.VISIBLE
             }
         } else {
-            adapterList!!.updateList(itemList)
+            adapterList.updateList(itemList)
+            binding.recyclerView.visibility = View.VISIBLE
+            binding.message.visibility = View.GONE
         }
     }
 }
