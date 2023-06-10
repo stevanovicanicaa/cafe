@@ -1,6 +1,7 @@
 package com.example.myproject_easycafe
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -9,26 +10,39 @@ import com.example.myproject_easycafe.databinding.ItemBillListBinding
 import java.text.DateFormat
 import java.util.*
 
-class BillListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class BillListAdapter(
+    private val listener: OnItemClickListener) :
+    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    companion object{
+    companion object {
         private const val HEADER = 0
         private const val ITEM = 1
     }
 
-    class ItemViewHolder(val itemBinding: ItemBillListBinding) :
-        RecyclerView.ViewHolder(itemBinding.root) {
+    inner class ItemViewHolder(val itemBinding: ItemBillListBinding) :
+        RecyclerView.ViewHolder(itemBinding.root), View.OnClickListener {
+
         fun bind(item: DataItem.ItemBillList) {
             val calendar = Calendar.getInstance()
             val currentTime: String =
-                DateFormat.getTimeInstance().format(calendar.getTime())
+                DateFormat.getDateInstance().format(calendar.getTime())
             itemBinding.time.text = currentTime
-
             itemBinding.item = item
+        }
+
+        init {
+            itemView.setOnClickListener(this)
+        }
+
+        override fun onClick(v: View?) {
+            val position = adapterPosition
+            if (position != RecyclerView.NO_POSITION) {
+                listener.onItemClick(position)
+            }
         }
     }
 
-    class HeaderViewHolder(val headerBinding: HeaderBillListBinding) :
+    inner class HeaderViewHolder(val headerBinding: HeaderBillListBinding) :
         RecyclerView.ViewHolder(headerBinding.root) {
         fun bind(header: DataItem.HeaderBillList) {
 
@@ -88,9 +102,9 @@ class BillListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         itemList.addAll(updatedList)
         diffResult.dispatchUpdatesTo(this)
     }
+
+    interface OnItemClickListener {
+        fun onItemClick(position: Int)
+    }
+
 }
-
-
-
-
-

@@ -10,10 +10,11 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myproject_easycafe.databinding.FragmentNewBillBinding
 
-class NewBillFragment : Fragment() {
+class NewBillFragment : Fragment(), NewBillAdapter.OnItemClickListener {
 
     private lateinit var binding: FragmentNewBillBinding
-    private val adapterList by lazy { NewBillAdapter() }
+    private val adapterList by lazy { NewBillAdapter(this) }
+    private lateinit var itemList: List<DataItem>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,13 +27,16 @@ class NewBillFragment : Fragment() {
             findNavController().navigate(R.id.action_newBillFragment_to_billDetailsFragment)
         }
 
-        val itemList = Data.getItems1()
+        itemList = Data.getItems1()
         adapterList.updateList(itemList)
         binding.recyclerView.apply {
             layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
             adapter = adapterList
         }
         return view
+    }
+
+    override fun onItemClick(position: Int) {
     }
 }
 

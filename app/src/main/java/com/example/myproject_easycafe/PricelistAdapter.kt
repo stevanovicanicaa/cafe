@@ -1,16 +1,19 @@
 package com.example.myproject_easycafe
 
+
+import android.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myproject_easycafe.databinding.HeaderPricelistBinding
 import com.example.myproject_easycafe.databinding.ItemPricelistBinding
-import java.util.*
 
-class PricelistAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class PricelistAdapter(
+    private val listener: OnItemClickListener,
+    private val listenerLong: OnLongClickListener) :
+    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     companion object{
         private const val HEADER = 0
@@ -18,13 +21,37 @@ class PricelistAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
 
-    class ItemViewHolder(val itemBinding: ItemPricelistBinding):
-        RecyclerView.ViewHolder(itemBinding.root){
-        fun bind(item: DataItem.ItemPricelist){
+    inner class ItemViewHolder(val itemBinding: ItemPricelistBinding):
+        RecyclerView.ViewHolder(itemBinding.root), View.OnClickListener, View.OnLongClickListener {
+        fun bind(item: DataItem.ItemPricelist) {
             itemBinding.item = item
         }
+
+        init {
+            itemView.setOnClickListener(this)
+        }
+
+        override fun onClick(v: View?) {
+            val position = adapterPosition
+            if (position != RecyclerView.NO_POSITION) {
+                listener.onItemClick(position)
+            }
+        }
+
+        init {
+            itemView.setOnLongClickListener(this)
+        }
+
+        override fun onLongClick(v: View?): Boolean {
+            val position = adapterPosition
+            if (position != RecyclerView.NO_POSITION) {
+                listenerLong.onLongClick(position)
+            }
+            return true
+        }
     }
-    class HeaderViewHolder(val headerBinding: HeaderPricelistBinding) :
+
+    inner class HeaderViewHolder(val headerBinding: HeaderPricelistBinding) :
         RecyclerView.ViewHolder(headerBinding.root) {
         fun bind(header: DataItem.HeaderPricelist) {
             headerBinding.header = header
@@ -83,4 +110,14 @@ class PricelistAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         diffResult.dispatchUpdatesTo(this)
     }
 
+    interface OnItemClickListener {
+        fun onItemClick(position: Int)
+    }
+
+    interface OnLongClickListener {
+        fun onLongClick(position: Int)
+    }
+
+
 }
+

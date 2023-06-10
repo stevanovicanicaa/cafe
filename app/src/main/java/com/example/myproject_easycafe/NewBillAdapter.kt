@@ -1,26 +1,50 @@
 package com.example.myproject_easycafe
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myproject_easycafe.databinding.HeaderNewBillBinding
+import com.example.myproject_easycafe.databinding.HeaderPricelistBinding
 import com.example.myproject_easycafe.databinding.ItemNewBillBinding
 
-class NewBillAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class NewBillAdapter(
+    private val listener: OnItemClickListener) :
+    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     companion object{
         private const val HEADER = 0
         private const val ITEM = 1
     }
-
-    class ItemViewHolder(val itemBinding: ItemNewBillBinding):
-        RecyclerView.ViewHolder(itemBinding.root){
-        fun bind(item: DataItem.ItemPricelist){
+    inner class ItemViewHolder(val itemBinding: ItemNewBillBinding):
+        RecyclerView.ViewHolder(itemBinding.root), View.OnClickListener {
+        fun bind(item: DataItem.ItemPricelist) {
             itemBinding.item = item
         }
+        init {
+            itemView.setOnClickListener(this)
+            var result = 0
+            itemBinding.plus.setOnClickListener{
+                result++
+                itemBinding.resultText.text = result.toString()
+            }
+            itemBinding.minus.setOnClickListener {
+                if (result > 0) {
+                    result--
+                    itemBinding.resultText.text = result.toString()
+                }
+            }
+        }
+
+        override fun onClick(v: View?) {
+            val position = adapterPosition
+            if (position != RecyclerView.NO_POSITION) {
+                listener.onItemClick(position)
+            }
+        }
     }
-    class HeaderViewHolder(val headerBinding: HeaderNewBillBinding) :
+
+    inner class HeaderViewHolder(val headerBinding: HeaderPricelistBinding) :
         RecyclerView.ViewHolder(headerBinding.root) {
         fun bind(header: DataItem.HeaderPricelist) {
             headerBinding.header = header
@@ -37,7 +61,7 @@ class NewBillAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 false)
             )
             HEADER -> HeaderViewHolder(
-                HeaderNewBillBinding.inflate(
+                HeaderPricelistBinding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,
                     false)
@@ -68,5 +92,7 @@ class NewBillAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         diffResult.dispatchUpdatesTo(this)
     }
 
-
+    interface OnItemClickListener {
+        fun onItemClick(position: Int)
+    }
 }
