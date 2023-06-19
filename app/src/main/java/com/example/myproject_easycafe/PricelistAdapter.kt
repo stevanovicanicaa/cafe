@@ -118,6 +118,4 @@ class PricelistAdapter(
         fun onLongClick(position: Int)
     }
 
-
 }
-

@@ -93,7 +93,3 @@ class PricelistFragment : Fragment(), PricelistAdapter.OnItemClickListener, Pric
             .show()
     }
 }
-
-
-
-
